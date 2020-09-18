@@ -10,14 +10,14 @@ const store = {
   questions: [
     {
       id: cuid(),
-      question: 'What color is broccoli?',
+      question: 'How old is Giorno Giovana?',
       answers: [
-        'red',
-        'orange',
-        'pink',
-        'green'
+        '33',
+        '100+',
+        '15',
+        '18'
       ],
-      correctAnswer: 'green'
+      correctAnswer: '15'
     },
     {
       id: cuid(),

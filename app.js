@@ -9,26 +9,112 @@ const store = {
   // 5 or more questions are required
   questions: [
     {
-      id: cuid(),
-      question: 'How old is Giorno Giovana?',
+      id: 1,
+      question: 'How old is Giorno Giovanna?',
       answers: [
         '33',
         '100+',
         '15',
         '18'
       ],
-      correctAnswer: '15'
+      correctAnswer: '15',
+      image: 'images/giornogiovanna.jpg'
     },
     {
-      id: cuid(),
-      question: 'What is the current year?',
+      id: 2,
+      question: 'How tall is Jotaro?',
       answers: [
-        '1970',
-        '2015',
-        '2020',
-        '2005'
+        '6 Ft',
+        '7 Ft',
+        '6 Ft 5 In',
+        '6 Ft 2 In'
       ],
-      correctAnswer: '2020'
+      correctAnswer: '6 Ft 5 In',
+      image: 'images/jotaro.png'
+    },
+    {
+      id: 3,
+      question: 'This plant was originally a...',
+      answers: [
+        'cat',
+        'horse',
+        'dog',
+        'owl'
+      ],
+      correctAnswer: 'cat',
+      image: 'images/tama.png'
+    },
+    {
+      id: 4,
+      question: 'Which of these luxury clothing brands do a crossover with the creator of JoJo?',
+      answers: [
+        'Prada',
+        'Gucci',
+        'Bvlgari',
+        'Louis Vuitton'
+      ],
+      correctAnswer: 'Gucci',
+      image: 'images/jojofashion.jpg'
+    },
+    {
+      id: 5,
+      question: 'This stand belongs to Koichi and is called',
+      answers: [
+        'Illusion',
+        'Jojo',
+        'Reverb',
+        'Resound'
+      ],
+      correctAnswer: 'Reverb',
+      image: 'images/koichistand.png'
+    },
+    {
+      id: 6,
+      question: 'What relation is Josuke to Jotaro?',
+      answers: [
+        'Cousin',
+        'Uncle',
+        'Grandfather',
+        'Grandson'
+      ],
+      correctAnswer: 'Uncle',
+      image: 'images/josukejotaro.jpg'
+    },
+    {
+      id: 7,
+      question: 'Mannish Boy has a stand called',
+      answers: [
+        'Death 13',
+        'Reaper',
+        'Charon',
+        'Justice'
+      ],
+      correctAnswer: 'Death 13',
+      image: 'images/mannishboy.png'
+    },
+    {
+      id: 8,
+      question: 'What stand does Rohan Kishibe use?',
+      answers: [
+        'Stairway to Heaven',
+        'Heavens Door',
+        'Freebird',
+        'Manga Magician'
+      ],
+      correctAnswer: 'Heavens Door',
+      image: 'images/rohan.png'
+    },
+    {
+      id: 9,
+      question: 'Polnareff from Stardust Crusaders inspired the following popular video game character',
+      answers: [
+        'Dhalsim',
+        'Guile',
+        'Megaman',
+        'One Punch Man'
+      ],
+      correctAnswer: 'Guile',
+      image: 'images/polnareff.jpg'
     }
   ],
   quizStarted: false,
@@ -47,6 +133,7 @@ function generateStartPage() {
 function generateQuestion(item) {
   return `<div class="card">
   <h2>${item.question}</h2>
+  <p>Score:${store.score}</p>
   <form>
   <input type="radio" id="${item.answers[0]}" name="answer" value="${item.answers[0]}">
   <label for="male">${item.answers[0]}</label><br>
@@ -93,7 +180,6 @@ function handleStartQuiz() {
 }
 
 function main() {
-  console.log(store.questions);
   handleStartQuiz();
   handleAnswerChoice();
   let startPage = generateStartPage();

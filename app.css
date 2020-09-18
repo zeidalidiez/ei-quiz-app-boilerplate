@@ -6,3 +6,16 @@
   * https://github.com/andreacardybailey/responsive_example/blob/master/styles/responsive-base.css 
   *
 */
+
+
+main{
+  width: 600px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.card{
+  border: 1px dashed blue;
+  margin: 50px;
+  padding: 50px;
+}

@@ -134,6 +134,7 @@ function generateQuestion(item) {
   return `<div class="card">
   <h2>${item.question}</h2>
   <p>Score:${store.score}</p>
+  <img src=${item.image}>
   <form>
   <input type="radio" id="${item.answers[0]}" name="answer" value="${item.answers[0]}">
   <label for="male">${item.answers[0]}</label><br>
@@ -155,6 +156,7 @@ function handleAnswerChoice(){
     let answer = $('input[name=answer]:checked').val();
     console.log(answer,currentQuestion.correctAnswer);
     if(answer === currentQuestion.correctAnswer){
+      store.score++;
       alert('Woot Woot!');
     } else {
       alert('You Suck!');

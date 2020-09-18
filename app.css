@@ -19,3 +19,16 @@ main{
   margin: 50px;
   padding: 50px;
 }
+
+img {
+  border-radius: 8px;
+  max-width: 100%;
+  height: auto;
+}
+
+
+h1 {
+  text-align:center;
+  justify-content: center;
+  align-self: center;
+}

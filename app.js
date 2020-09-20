@@ -131,9 +131,10 @@ function generateStartPage() {
 }
 
 function generateQuestion(item) {
+  let pctOfTotal = ((store.score / store.questionNumber) * 100).toFixed(2) + '%'
   return `<div class="card">
   <h2>${item.question}</h2>
-  <p>Score:${store.score}</p>
+  <p>Score:${store.score} out of ${store.questionNumber} - ${pctOfTotal}</p>
   <img src=${item.image}>
   <form>
   <input type="radio" id="${item.answers[0]}" name="answer" value="${item.answers[0]}">
@@ -157,9 +158,15 @@ function handleAnswerChoice(){
     console.log(answer,currentQuestion.correctAnswer);
     if(answer === currentQuestion.correctAnswer){
       store.score++;
-      alert('Woot Woot!');
     } else {
-      alert('You Suck!');
+      var flash = false;
+      var task = setInterval(function() {
+        if(flash = !flash) {
+          document.body.style.backgroundColor = '#ff0';
+        } else {
+          document.body.style.backgroundColor = '#f00';
+        }
+      }, 100000000);
     }
     store.questionNumber++;
     let nextQuestion = generateQuestion(store.questions[store.questionNumber]);

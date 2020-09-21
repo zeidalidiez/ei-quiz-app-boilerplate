@@ -131,10 +131,11 @@ function generateStartPage() {
 }
 
 function generateQuestion(item) {
-  let pctOfTotal = ((store.score / store.questionNumber) * 100).toFixed(2) + '%';
+  let pctPart = ((store.score / store.questionNumber) * 100);
+  let pctOfTotal = Math.round(pctPart);
   return `<div class="card">
   <h2>${item.question}</h2>
-  <p>Score:${store.score} out of ${store.questionNumber} - ${pctOfTotal}</p>
+  <p>Score:${store.score} out of ${store.questionNumber} - ${pctOfTotal} %</p>
   <img src=${item.image}>
   <form>
   <input type="radio" id="${item.answers[0]}" name="answer" value="${item.answers[0]}">

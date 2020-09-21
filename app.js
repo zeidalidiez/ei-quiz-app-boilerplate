@@ -46,7 +46,7 @@ const store = {
     },
     {
       id: 4,
-      question: 'Which of these luxury clothing brands do a crossover with the creator of JoJo?',
+      question: 'Which of these luxury clothing brands participated in a crossover with the creator of JoJo?',
       answers: [
         'Prada',
         'Gucci',
@@ -131,7 +131,7 @@ function generateStartPage() {
 }
 
 function generateQuestion(item) {
-  let pctOfTotal = ((store.score / store.questionNumber) * 100).toFixed(2) + '%'
+  let pctOfTotal = ((store.score / store.questionNumber) * 100).toFixed(2) + '%';
   return `<div class="card">
   <h2>${item.question}</h2>
   <p>Score:${store.score} out of ${store.questionNumber} - ${pctOfTotal}</p>
@@ -158,15 +158,9 @@ function handleAnswerChoice(){
     console.log(answer,currentQuestion.correctAnswer);
     if(answer === currentQuestion.correctAnswer){
       store.score++;
+      console.log('success');
     } else {
-      var flash = false;
-      var task = setInterval(function() {
-        if(flash = !flash) {
-          document.body.style.backgroundColor = '#ff0';
-        } else {
-          document.body.style.backgroundColor = '#f00';
-        }
-      }, 100000000);
+      console.log('failure');
     }
     store.questionNumber++;
     let nextQuestion = generateQuestion(store.questions[store.questionNumber]);

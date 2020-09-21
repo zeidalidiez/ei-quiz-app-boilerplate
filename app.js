@@ -124,9 +124,17 @@ const store = {
 
 function generateStartPage() {
   return `<div class="card">
-  <h2>Welcome to my quiz</h2>
-  <p>This is the best quiz ever!</p>
-  <button id="start">Start The quiz</button>
+  <h2>Hello and Welcome to my JJBA Quiz</h2>
+  <p>Test your knowledge about Jojo's Bizarre Adventure</p>
+  <button id="start">Begin</button>
+</div>`;
+}
+
+
+function generateEndPage() {
+  return `<div class="card">
+  <h2>Thank you for taking my Quiz</h2>
+  <p>Your score is ${store.score} out of ${store.questionNumber}</p>
 </div>`;
 }
 
@@ -139,9 +147,9 @@ function generateQuestion(item) {
   <img src=${item.image}>
   <form>
   <input type="radio" id="${item.answers[0]}" name="answer" value="${item.answers[0]}">
-  <label for="male">${item.answers[0]}</label><br>
+  <label for="male">${item.answers[0]}</label>
   <input type="radio" id="${item.answers[1]}" name="answer" value="${item.answers[1]}">
-  <label for="female">${item.answers[1]}</label><br>
+  <label for="female">${item.answers[1]}</label>
   <input type="radio" id="${item.answers[2]}" name="answer" value="${item.answers[2]}">
   <label for="other">${item.answers[2]}</label>
   <input type="radio" id="${item.answers[3]}" name="answer" value="${item.answers[3]}">
@@ -164,8 +172,14 @@ function handleAnswerChoice(){
       console.log('failure');
     }
     store.questionNumber++;
-    let nextQuestion = generateQuestion(store.questions[store.questionNumber]);
-    render(nextQuestion);
+    if(store.questionNumber === 9) {
+      let endPage = generateEndPage();
+      render(endPage);
+    } else {
+      let nextQuestion = generateQuestion(store.questions[store.questionNumber]);
+      render(nextQuestion);
+    }
+
   });
 
 

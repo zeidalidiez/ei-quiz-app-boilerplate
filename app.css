@@ -18,6 +18,8 @@ main{
   border: 1px dashed blue;
   margin: 50px;
   padding: 50px;
+  display: flex;
+  flex-direction: column;
 }
 
 img {
@@ -31,4 +33,22 @@ h1 {
   text-align:center;
   justify-content: center;
   align-self: center;
+}
+
+form {
+  padding: 10px;
+  margin:10px 0;
+  border: 5px solid purple;
+  border-radius: 20px;
+  width:100%;
+  flex-direction: column;
+}
+
+input[type="radio"] {
+  background-color: rgb(255, 255, 255);
+  border: 5px solid purple;
+  border-radius: 10px;
+  margin: 15px;
+  display: inline-table;
+  padding: 10px;
 }

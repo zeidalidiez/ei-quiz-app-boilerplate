@@ -5,6 +5,9 @@
 /**
  * Example store structure
  */
+
+const quizContainer = document.getElementsByClassName('card');
+
 const store = {
   // 5 or more questions are required
   questions: [
@@ -146,13 +149,13 @@ function generateQuestion(item) {
   <p>Score:${store.score} out of ${store.questionNumber} - ${pctOfTotal} %</p>
   <img src=${item.image}>
   <form>
-  <input type="radio" id="${item.answers[0]}" name="answer" value="${item.answers[0]}">
+  <input type="radio" class="answers" id="${item.answers[0]}" name="answer" value="${item.answers[0]}">
   <label for="male">${item.answers[0]}</label>
-  <input type="radio" id="${item.answers[1]}" name="answer" value="${item.answers[1]}">
+  <input type="radio" class="answers" id="${item.answers[1]}" name="answer" value="${item.answers[1]}">
   <label for="female">${item.answers[1]}</label>
-  <input type="radio" id="${item.answers[2]}" name="answer" value="${item.answers[2]}">
+  <input type="radio" class="answers" id="${item.answers[2]}" name="answer" value="${item.answers[2]}">
   <label for="other">${item.answers[2]}</label>
-  <input type="radio" id="${item.answers[3]}" name="answer" value="${item.answers[3]}">
+  <input type="radio" class="answers" id="${item.answers[3]}" name="answer" value="${item.answers[3]}">
   <label for="other">${item.answers[3]}</label>
   <button type="submit">Submit</button>
   </form>
@@ -167,7 +170,7 @@ function handleAnswerChoice(){
     console.log(answer,currentQuestion.correctAnswer);
     if(answer === currentQuestion.correctAnswer){
       store.score++;
-      console.log('success');
+      console.log(quizContainer);
     } else {
       console.log('failure');
     }

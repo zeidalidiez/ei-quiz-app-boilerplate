@@ -15,12 +15,17 @@ main{
 }
 
 .card{
-  border: 1px dashed blue;
-  margin: 50px;
-  padding: 50px;
-  display: flex;
-  flex-direction: column;
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  user-select: none;
 }
+
+
+
 
 img {
   border-radius: 8px;
@@ -36,19 +41,37 @@ h1 {
 }
 
 form {
-  padding: 10px;
-  margin:10px 0;
-  border: 5px solid purple;
-  border-radius: 20px;
-  width:100%;
-  flex-direction: column;
 }
 
-input[type="radio"] {
+/* input[type="radio"] {
   background-color: rgb(255, 255, 255);
   border: 5px solid purple;
   border-radius: 10px;
   margin: 15px;
   display: inline-table;
   padding: 10px;
+} */
+
+/* .answers {
+  border: 5px solid purple;
+  display: inline-table;
+  border-radius: 10px;
+} */
+
+label {
+  border: 5px solid purple;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  border-radius: 10px;
+
+}
+
+
+input[type='radio'] {
+  border: 5px solid purple;
+  display: flex;
+  position: absolute;
+  padding-left: 35px;
+  margin-bottom: 12px;
 }

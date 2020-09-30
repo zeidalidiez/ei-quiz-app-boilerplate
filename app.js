@@ -152,30 +152,31 @@ function generateAnswerChecking() {
 </div>`;
 }
 
-function handleAnswerChecking(){
-  $('main').on('button', 'form', function(evt){
-    evt.preventDefault();
-    let currentQuestion = store.questions[store.questionNumber];
-    let answer = $('input[name=answer]:checked').val();
-    console.log(answer,currentQuestion.correctAnswer);
-    if(answer === currentQuestion.correctAnswer){
-      store.score++;
-      console.log(quizContainer);
-    } else {
-      console.log('failure');
-    }
-    store.questionNumber++;
-    if(store.questionNumber  >= store.questions.length) {
-      let endPage = generateEndPage();
+// function handleAnswerChecking(){
+//   $('main').on('button', 'form', function(evt){
+//     evt.preventDefault();
+//     let currentQuestion = store.questions[store.questionNumber];
+//     let answer = $('input[name=answer]:checked').val();
+//     console.log(answer,currentQuestion.correctAnswer);
+//     if(answer === currentQuestion.correctAnswer){
+//       store.score++;
+//       console.log(quizContainer);
+//     } else {
+//       console.log('failure');
+//       $('.answers').css('background-color', 'red');
+//     }
+//     store.questionNumber++;
+//     if(store.questionNumber  >= store.questions.length) {
+//       let endPage = generateEndPage();
 
-      render(endPage);
-    } else {
-      let nextQuestion = generateQuestion(store.questions[store.questionNumber]);
-      render(nextQuestion);
-    }
+//       render(endPage);
+//     } else {
+//       let nextQuestion = generateQuestion(store.questions[store.questionNumber]);
+//       render(nextQuestion);
+//     }
 
-  });
-}
+//   });
+// }
 
 function generateQuestion(item) {
   let pctPart = ((store.score / store.questionNumber) * 100);
@@ -208,17 +209,22 @@ function handleAnswerChoice(){
     if(answer === currentQuestion.correctAnswer){
       store.score++;
       console.log(quizContainer);
+      $('label').css('background-color', 'green');
     } else {
       console.log('failure');
+      $('label').css('background-color', 'red');
     }
     store.questionNumber++;
     if(store.questionNumber  >= store.questions.length) {
       let endPage = generateEndPage();
       store.quizStarted = false; /// addition to set quiz to ended
-      render(endPage);
+      setTimeout(() => {  render(endPage); }, 1000);
+      
+
     } else {
       let nextQuestion = generateQuestion(store.questions[store.questionNumber]);
-      render(nextQuestion);
+
+      setTimeout(() => {  render(nextQuestion); }, 3000);
     }
 
   });

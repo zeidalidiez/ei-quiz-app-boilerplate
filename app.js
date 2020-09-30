@@ -138,7 +138,43 @@ function generateEndPage() {
   return `<div class="card">
   <h2>Thank you for taking my Quiz</h2>
   <p>Your score is ${store.score} out of ${store.questionNumber}</p>
+  <button onClick="window.location.reload();">Retry</button>
 </div>`;
+}
+
+function generateAnswerChecking() {
+  return `<div class="card">
+  <h2>Thank you for taking my Quiz</h2>
+  <p>Your score is ${store.score} out of ${store.questionNumber}</p>
+  <form>
+  <button type="button">OK!</button>
+  </form>
+</div>`;
+}
+
+function handleAnswerChecking(){
+  $('main').on('button', 'form', function(evt){
+    evt.preventDefault();
+    let currentQuestion = store.questions[store.questionNumber];
+    let answer = $('input[name=answer]:checked').val();
+    console.log(answer,currentQuestion.correctAnswer);
+    if(answer === currentQuestion.correctAnswer){
+      store.score++;
+      console.log(quizContainer);
+    } else {
+      console.log('failure');
+    }
+    store.questionNumber++;
+    if(store.questionNumber  >= store.questions.length) {
+      let endPage = generateEndPage();
+
+      render(endPage);
+    } else {
+      let nextQuestion = generateQuestion(store.questions[store.questionNumber]);
+      render(nextQuestion);
+    }
+
+  });
 }
 
 function generateQuestion(item) {
@@ -146,6 +182,7 @@ function generateQuestion(item) {
   let pctOfTotal = Math.round(pctPart);
   return `<div class="card">
   <h2>${item.question}</h2>
+  <h2>Question ${store.questionNumber} out of ${store.questions.length} </h2>
   <p>Score:${store.score} out of ${store.questionNumber} - ${pctOfTotal} %</p>
   <img src=${item.image}>
   <form>
@@ -175,8 +212,9 @@ function handleAnswerChoice(){
       console.log('failure');
     }
     store.questionNumber++;
-    if(store.questionNumber === 9) {
+    if(store.questionNumber  >= store.questions.length) {
       let endPage = generateEndPage();
+      store.quizStarted = false; /// addition to set quiz to ended
       render(endPage);
     } else {
       let nextQuestion = generateQuestion(store.questions[store.questionNumber]);

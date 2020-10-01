@@ -126,6 +126,7 @@ const store = {
 };
 
 let lastAnswer = 'None';
+let lastQuestion = 'None';
 let qN = store.questionNumber;
 
 
@@ -139,9 +140,12 @@ function generateStartPage() {
 
 
 function generateEndPage() {
+  let pctPart = ((store.score / store.questionNumber) * 100);
+  let pctOfTotal = Math.round(pctPart) || 0;
   return `<div class="card">
   <h2>Thank you for taking my Quiz</h2>
-  <p>Your score was  ${store.score} out of ${store.questionNumber}</p>
+  <p>Score:${store.score} out of ${store.questionNumber} - ${pctOfTotal} %</p>
+  <p> Last Question: ${lastQuestion} </p>
   <p> Last Answer: ${lastAnswer} </p>
   <button onClick="window.location.reload();">Retry</button>
 </div>`;
@@ -190,17 +194,18 @@ function generateQuestion(item) {
   <h2>${item.question}</h2>
   <h2>Question ${store.questionNumber} out of ${store.questions.length} </h2>
   <p>Score:${store.score} out of ${store.questionNumber} - ${pctOfTotal} %</p>
+  <p> Last Question: ${lastQuestion} </p>
   <p> Last Answer: ${lastAnswer} </p>
   <img src=${item.image}>
   <form>
   <input type="radio" class="answers" id="${item.answers[0]}" name="answer" value="${item.answers[0]}" required>
-  <label for="male">${item.answers[0]}</label>
+  <label id="answerA" for="male">${item.answers[0]}</label>
   <input type="radio" class="answers" id="${item.answers[1]}" name="answer" value="${item.answers[1]}">
-  <label for="female">${item.answers[1]}</label>
+  <label id="answerB" for="female">${item.answers[1]}</label>
   <input type="radio" class="answers" id="${item.answers[2]}" name="answer" value="${item.answers[2]}">
-  <label for="other">${item.answers[2]}</label>
+  <label id="answerC" for="other">${item.answers[2]}</label>
   <input type="radio" class="answers" id="${item.answers[3]}" name="answer" value="${item.answers[3]}">
-  <label for="other">${item.answers[3]}</label>
+  <label id="answerD" for="other">${item.answers[3]}</label>
   <button type="submit">Submit</button>
   </form>
 </div>`;
@@ -215,14 +220,22 @@ function handleAnswerChoice(){
     if(answer === currentQuestion.correctAnswer){
       store.score++;
       console.log(quizContainer);
-      $('label').css('background-color', 'green');
+      document.getElementById('answerA').style.backgroundColor  = 'green';
+      document.getElementById('answerB').style.backgroundColor  = 'green';
+      document.getElementById('answerC').style.backgroundColor  = 'green';
+      document.getElementById('answerD').style.backgroundColor  = 'green';
     } else {
       console.log('failure');
-      $('label').css('background-color', 'red');
+      document.getElementById('answerA').style.backgroundColor  = 'red';
+      document.getElementById('answerB').style.backgroundColor  = 'red';
+      document.getElementById('answerC').style.backgroundColor  = 'red';
+      document.getElementById('answerD').style.backgroundColor  = 'red';
     }
     store.questionNumber++;
     if(store.questionNumber  >= store.questions.length) {
       lastAnswer = store.questions[qN].correctAnswer;
+      lastQuestion = store.questions[qN].question;
+      qN = 0;
       let endPage = generateEndPage();
       store.quizStarted = false; /// addition to set quiz to ended
       setTimeout(() => {  render(endPage); }, 1000);
@@ -230,6 +243,7 @@ function handleAnswerChoice(){
 
     } else {
       lastAnswer = store.questions[qN].correctAnswer;
+      lastQuestion = store.questions[qN].question;
       qN++;
       let nextQuestion = generateQuestion(store.questions[store.questionNumber]);
 

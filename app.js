@@ -187,7 +187,7 @@ function generateQuestion(item) {
   <p>Score:${store.score} out of ${store.questionNumber} - ${pctOfTotal} %</p>
   <img src=${item.image}>
   <form>
-  <input type="radio" class="answers" id="${item.answers[0]}" name="answer" value="${item.answers[0]}">
+  <input type="radio" class="answers" id="${item.answers[0]}" name="answer" value="${item.answers[0]}" required>
   <label for="male">${item.answers[0]}</label>
   <input type="radio" class="answers" id="${item.answers[1]}" name="answer" value="${item.answers[1]}">
   <label for="female">${item.answers[1]}</label>

@@ -125,6 +125,10 @@ const store = {
   score: 0
 };
 
+let lastAnswer = 'None';
+let qN = store.questionNumber;
+
+
 function generateStartPage() {
   return `<div class="card">
   <h2>Hello and Welcome to my JJBA Quiz</h2>
@@ -137,7 +141,8 @@ function generateStartPage() {
 function generateEndPage() {
   return `<div class="card">
   <h2>Thank you for taking my Quiz</h2>
-  <p>Your score is ${store.score} out of ${store.questionNumber}</p>
+  <p>Your score was  ${store.score} out of ${store.questionNumber}</p>
+  <p> Last Answer: ${lastAnswer} </p>
   <button onClick="window.location.reload();">Retry</button>
 </div>`;
 }
@@ -180,11 +185,12 @@ function generateAnswerChecking() {
 
 function generateQuestion(item) {
   let pctPart = ((store.score / store.questionNumber) * 100);
-  let pctOfTotal = Math.round(pctPart);
+  let pctOfTotal = Math.round(pctPart) || 0;
   return `<div class="card">
   <h2>${item.question}</h2>
   <h2>Question ${store.questionNumber} out of ${store.questions.length} </h2>
   <p>Score:${store.score} out of ${store.questionNumber} - ${pctOfTotal} %</p>
+  <p> Last Answer: ${lastAnswer} </p>
   <img src=${item.image}>
   <form>
   <input type="radio" class="answers" id="${item.answers[0]}" name="answer" value="${item.answers[0]}" required>
@@ -216,12 +222,15 @@ function handleAnswerChoice(){
     }
     store.questionNumber++;
     if(store.questionNumber  >= store.questions.length) {
+      lastAnswer = store.questions[qN].correctAnswer;
       let endPage = generateEndPage();
       store.quizStarted = false; /// addition to set quiz to ended
       setTimeout(() => {  render(endPage); }, 1000);
       
 
     } else {
+      lastAnswer = store.questions[qN].correctAnswer;
+      qN++;
       let nextQuestion = generateQuestion(store.questions[store.questionNumber]);
 
       setTimeout(() => {  render(nextQuestion); }, 3000);
@@ -250,6 +259,19 @@ function main() {
   let startPage = generateStartPage();
   render(startPage);
 }
+
+$(function() {
+
+  $('input[type="checkbox"]').bind('change', function (v) {
+
+    if($(this).is(':checked')) {
+      $(this).parent().addClass('active');
+    } else {
+      $(this).parent().removeClass('active');
+    }
+  });
+
+});
 
 $(main);
 /**
